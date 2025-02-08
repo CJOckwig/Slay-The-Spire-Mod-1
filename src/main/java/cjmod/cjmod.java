@@ -1,9 +1,11 @@
 package cjmod;
 
 import basemod.BaseMod;
+import basemod.interfaces.EditCharactersSubscriber;
 import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.interfaces.PostInitializeSubscriber;
+import cjmod.Meowser.Meowser;
 import cjmod.util.GeneralUtils;
 import cjmod.util.KeywordInfo;
 import cjmod.util.TextureLoader;
@@ -31,6 +33,7 @@ import java.util.*;
 @SpireInitializer
 public class cjmod implements
         EditStringsSubscriber,
+        EditCharactersSubscriber,
         EditKeywordsSubscriber,
         PostInitializeSubscriber {
     public static ModInfo info;
@@ -163,7 +166,7 @@ public class cjmod implements
         return resourcesFolder + "/images/" + file;
     }
     public static String characterPath(String file) {
-        return resourcesFolder + "/images/character/" + file;
+        return resourcesFolder + "/images/Meowser/" + file;
     }
     public static String powerPath(String file) {
         return resourcesFolder + "/images/powers/" + file;
@@ -219,5 +222,10 @@ public class cjmod implements
         else {
             throw new RuntimeException("Failed to determine mod info/ID based on initializer.");
         }
+    }
+
+    @Override
+    public void receiveEditCharacters() {
+        Meowser.Meta.registerCharacter();
     }
 }
